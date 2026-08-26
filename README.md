@@ -2,8 +2,7 @@
 
 An end-to-end machine learning system that predicts the probability of a loan applicant defaulting within 2 years, built for Razorpay Buildathon (AI Risk Manager track).
 
-**[Live Demo](#)** · **[Video Walkthrough](#)** ← add links once ready
-
+**[Live Demo](https://creditriskpredictor-dedujnq5cgkfm8pmtgdzkb.streamlit.app/)**
 ---
 
 ## What it does
