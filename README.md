@@ -1,13 +1,15 @@
 # Credit Risk Predictor
 
-An end-to-end machine learning system that predicts the probability of a loan applicant defaulting within 2 years, built for Razorpay Buildathon (AI Risk Manager track).
+An end-to-end machine learning system that predicts the probability of a loan applicant defaulting within 2 years, built for Razorpay Buildathon (Open Track).
+
+**Why Open Track:** Credit risk prediction is a well-understood, high stakes ML problem — one where the interesting work isn't just training a model, but handling messy real world data, an extreme class imbalance, and making the model's decisions explainable. I chose to go deep on this problem rather than force fit it into a narrower track it didn't quite match.
 
 **[Live Demo](https://creditriskpredictor-dedujnq5cgkfm8pmtgdzkb.streamlit.app/)** · **[Video Walkthrough](#)**
 ---
 
 ## What it does
 
-Given an applicant's financial profile — income, existing debt, credit utilization, and payment history — the model outputs a default probability and a risk tier (Low / Medium / High). It's designed to sit upstream of a loan approval decision, giving a lender a fast, explainable signal on applicant risk.
+Given an applicant's financial profile income, existing debt, credit utilization, and payment history. The model outputs a default probability and a risk tier (Low / Medium / High). It's designed to sit upstream of a loan approval decision, giving a lender a fast, explainable signal on applicant risk.
 
 ![Feature Importance](feature_importance.png)
 
@@ -15,7 +17,7 @@ Given an applicant's financial profile — income, existing debt, credit utiliza
 
 ## Why this matters
 
-Manual credit risk assessment is slow, inconsistent, and hard to scale. A model like this doesn't replace a human underwriter — it gives them a fast, explainable first pass, so they can focus attention on borderline cases instead of re-evaluating every applicant from scratch.
+Manual credit risk assessment is slow, inconsistent, and hard to scale. A model like this doesn't replace a human underwriter it gives them a fast, explainable first pass, so they can focus attention on borderline cases instead of re evaluating every applicant from scratch.
 
 ---
 
@@ -23,7 +25,7 @@ Manual credit risk assessment is slow, inconsistent, and hard to scale. A model 
 
 [Give Me Some Credit](https://www.kaggle.com/c/GiveMeSomeCredit/data) (Kaggle) — 150,000 historical loan records with 10 financial features and a binary default label (`SeriousDlqin2yrs`).
 
-**Key challenge: severe class imbalance.** Only 6.7% of applicants in the dataset defaulted. A model that just predicts "no default" for everyone would already be 93% accurate — and completely useless. This shaped every downstream decision, from the evaluation metric (ROC-AUC and recall, not accuracy) to the modeling approach (class weighting).
+**Key challenge: severe class imbalance.** Only 6.7% of applicants in the dataset defaulted. A model that just predicts "no default" for everyone would already be 93% accurate and completely useless. This shaped every downstream decision, from the evaluation metric (ROC-AUC and recall, not accuracy) to the modeling approach (class weighting).
 
 ---
 
@@ -31,8 +33,8 @@ Manual credit risk assessment is slow, inconsistent, and hard to scale. A model 
 
 **1. Data Cleaning**
 - Dropped 1 row with `age = 0` (impossible value)
-- Removed 269 rows (~0.18%) where late-payment columns had values of 96/98 — these are known placeholder/error codes in this dataset, not real counts
-- Capped `DebtRatio` and `RevolvingUtilizationOfUnsecuredLines` at 2.0 — both are meant to be ratios but had outliers in the thousands, caused by near-zero income values in the denominator
+- Removed 269 rows (~0.18%) where late payment columns had values of 96/98 — these are known placeholder/error codes in this dataset, not real counts
+- Capped `DebtRatio` and `RevolvingUtilizationOfUnsecuredLines` at 2.0 — both are meant to be ratios but had outliers in the thousands, caused by near zero income values in the denominator
 - Imputed missing `MonthlyIncome` (20% missing) and `NumberOfDependents` (2.6% missing) with median values
 
 **2. Feature Engineering**
@@ -54,10 +56,10 @@ The tuned XGBoost model was selected as final. `scale_pos_weight` was used to ha
 **Why recall over precision:** In credit risk, a missed defaulter (false negative) is typically far more costly to a lender than a false alarm on a safe applicant (false positive) — a missed default means real financial loss, while a false alarm just means extra manual review. The model was tuned with this asymmetry in mind.
 
 **4. Explainability**
-SHAP (TreeExplainer) was used to understand not just *which* features matter, but *how* — e.g., confirming that high `TotalPastDue` and high credit utilization push predictions toward "risky," while older age pushes toward "safe," consistent with real-world credit risk intuition.
+SHAP (TreeExplainer) was used to understand not just *which* features matter, but *how* — e.g., confirming that high `TotalPastDue` and high credit utilization push predictions toward "risky," while older age pushes toward "safe," consistent with real world credit risk intuition.
 
 **5. Deployment**
-A Streamlit dashboard takes applicant details as input and returns a live risk score with a plain-language explanation of what's driving it.
+A Streamlit dashboard takes applicant details as input and returns a live risk score with a plain language explanation of what's driving it.
 
 ---
 
@@ -94,4 +96,4 @@ streamlit run app.py
 
 ---
 
-*Built for Razorpay Buildathon — AI Risk Manager track. For educational/demonstration purposes.*
+
