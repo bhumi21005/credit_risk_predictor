@@ -1,8 +1,8 @@
 # Credit Risk Predictor
 
-An end-to-end machine learning system that predicts the probability of a loan applicant defaulting within 2 years, built for Razorpay Buildathon (Open Track).
+An end-to-end machine learning system that predicts the probability of a loan applicant defaulting within 2 years..
 
-**Why Open Track:** Credit risk prediction is a well-understood, high-stakes ML problem — one where the interesting work isn't just training a model, but handling messy real-world data, an extreme class imbalance, and making the model's decisions explainable and business-actionable. I chose to go deep on this problem rather than force-fit it into a narrower track it didn't quite match.
+Credit risk prediction is a well-understood, high-stakes ML problem — one where the interesting work isn't just training a model, but handling messy real world data, an extreme class imbalance, and making the model's decisions explainable and business actionable. I chose to go deep on this problem.
 
 **[Live Demo](https://creditriskpredictor-dedujnq5cgkfm8pmtgdzkb.streamlit.app/)**
 
