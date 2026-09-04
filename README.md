@@ -112,4 +112,3 @@ pytest tests/ -v
 
 ---
 
-*Built for Razorpay Buildathon — Open Track. For educational/demonstration purposes.*
